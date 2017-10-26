@@ -4,5 +4,30 @@
     "debug": "^3.1.0",
     "reverse-string": "^0.0.6",
     "simple-git": "^1.80.1"
+  },
+  "name": "git-ticket",
+  "description": "Get JIRA tickets from the Git log of the currently active branch, starting from tag until to tag.",
+  "version": "0.0.1",
+  "main": "git-ticket.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joostmeijles/git-ticket.git"
+  },
+  "keywords": [
+    "Git",
+    "Jira"
+  ],
+  "author": "Joost Meijles",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joostmeijles/git-ticket/issues"
+  },
+  "homepage": "https://github.com/joostmeijles/git-ticket#readme",
+  "bin": {
+    "git-ticket": "./index.js"
   }
 }
