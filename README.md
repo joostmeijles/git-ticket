@@ -5,6 +5,5 @@ Example to retrieve all JIRA tickets that are present in commit messages startin
 ```
 $ node get-ticket.js v1Tag v2Tag
 JIRA-1
-JIRA-2
 ```
 JIRA ticket numbers are written to standard output.
