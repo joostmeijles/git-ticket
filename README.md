@@ -12,3 +12,12 @@ $ get-ticket v1Tag v2Tag
 JIRA-1
 ```
 JIRA ticket numbers are written to standard output.
+
+## Jira integration
+The Jira ticket summary can be automatically retrieved by passing the `--jira_config` option:
+```
+$ get-ticket v1Tag v3Tag --jira_config jira_example_config.json
+JIRA-1
+GIT-1 First test story
+```
+The JSON file contains the Jira connection details and authentication credentials to use, see: jira_example_config.json and https://www.npmjs.com/package/jira-connector for details.

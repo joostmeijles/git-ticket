@@ -1,0 +1,7 @@
+{
+    "host": "git-ticket.atlassian.net",
+    "basic_auth": {
+        "username": "myUsername",
+        "password": "myPassword"
+    }
+}
