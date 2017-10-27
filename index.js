@@ -23,8 +23,9 @@ function findIdsInString(str) {
 
 function findIdsInLog(log) {
     linesWithIds = log.all.map((line) => findIdsInString(line.message));
-    ids = [].concat(...linesWithIds);
-    return ids;
+    const ids = [].concat(...linesWithIds);
+    const uniqueIds = Array.from(new Set(ids));
+    return uniqueIds;
 }
 
 function printIds(ids) {
