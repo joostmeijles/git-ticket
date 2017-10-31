@@ -38,7 +38,7 @@ const parser = new ArgumentParser({
 parser.addArgument('from', {help: 'Git tag to start from (not included)'});
 parser.addArgument('to', {help: 'Git tag to end with (included)'});
 parser.addArgument(
-    '--jira_config', 
+    '--jira-config', 
     {help: 'JSON file containing Jira connection details and authentication credentials, see: jira_example_config.json and https://www.npmjs.com/package/jira-connector'});
 const args = parser.parseArgs();
 
