@@ -21,4 +21,4 @@ GIT-1 First test story
 GIT-2
 JIRA-1
 ```
-The JSON file contains the Jira connection details and authentication credentials to use, see: jira_example_config.json and https://www.npmjs.com/package/jira-connector for details.
+The JSON file contains the Jira connection details and authentication credentials to use, see jira_example_config.json and https://www.npmjs.com/package/jira-connector for details.
