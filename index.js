@@ -24,6 +24,7 @@ function handleLog(log, jiraClient) {
             issues.map(printIssueLine);
         });
     } else {
+        ids.sort();
         ids.map(id => printIssueLine({key:id}));
     }
 }
