@@ -5,21 +5,16 @@ function createClient(configFile) {
     return new JiraClient(require(configFile));
 }
 
-function getIssueSummary(client, issueKey, cb) {
-    client.issue.getIssue({issueKey: issueKey}, 
-        function (error, issue) {
-            if (error) {
-                debug(error);
-                cb('');
-                return;
-            }
-
-            debug(`${issueKey} ${issue.fields.summary}`);
-            cb(issue.fields.summary);
-    });
+function getIssue(client, key) {
+    return client.issue.getIssue({issueKey: key})
+        .then(issue => Promise.resolve({key:key, issue:issue}))
+        .catch(error => {
+            debug(error);
+            return Promise.resolve({key:key, issue:null});
+        }); 
 }
 
 module.exports = {
     createClient: createClient,
-    getIssueSummary: getIssueSummary
+    getIssue: getIssue
 }

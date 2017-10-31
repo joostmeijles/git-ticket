@@ -4,11 +4,12 @@ const git = require('./git');
 const jira = require('./jira');
 const path = require("path");
 
-function printIssueLine(id, summary) {
-    if (summary) {
-        console.log(`${id} ${summary}`);
+function printIssueLine(keyIssue) {
+    const {key, issue} = keyIssue;
+    if (issue) {
+        console.log(`${key} ${issue.fields.summary}`);
     } else {
-        console.log(`${id}`);
+        console.log(`${key}`);
     }
 }
 
@@ -16,14 +17,19 @@ function handleLog(log, jiraClient) {
     const ids = git.findIdsInLog(log);
 
     if (jiraClient) {
-        ids.map(id => jira.getIssueSummary(jiraClient, id, (summary) => printIssueLine(id, summary)));
+        Promise.all(
+            ids.map(id => jira.getIssue(jiraClient, id))
+        ).then(issues => {
+            issues.sort((a, b) => (a.key).localeCompare(b.key));
+            issues.map(printIssueLine);
+        });
     } else {
-        ids.map(id => printIssueLine(id));
+        ids.map(id => printIssueLine({key:id}));
     }
 }
 
 const parser = new ArgumentParser({
-    version: '0.0.1',
+    version: require('./package.json').version,
     addHelp: true,
     description: 'Get JIRA tickets from the Git log of the currently active branch, starting from tag until to tag.'
 });
