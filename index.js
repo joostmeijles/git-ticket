@@ -2,7 +2,7 @@
 const cli = require('./cli');
 const git = require('./git');
 const jira = require('./jira');
-const path = require("path");
+const path = require('path');
 
 function printIssueLine(keyIssue) {
     const {key, issue} = keyIssue;
@@ -47,16 +47,4 @@ function verify(args) {
     console.log('Not implemented');
 }
 
-function main() {
-    const args = cli.parseArgs();
-
-    switch(args.subcommand_name) {
-        case 'list':
-        case 'ls':
-            return list(args);
-        case 'verify':
-            return verify(args);
-    }
-}
-
-main();
+cli(list, verify);

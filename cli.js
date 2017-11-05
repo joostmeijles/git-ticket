@@ -39,4 +39,16 @@ check.addArgument(
     }
 );
 
-module.exports = parser;
+function handle(list, verify) {
+    const args = parser.parseArgs();
+    
+    switch(args.subcommand_name) {
+        case 'list':
+        case 'ls':
+            return list(args);
+        case 'verify':
+            return verify(args);
+    }
+}
+
+module.exports = handle;
