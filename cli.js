@@ -25,13 +25,15 @@ ls.addArgument(
 );
 ls.setDefaults();
 
-const check = subparsers.addParser('verify', {
+const update = subparsers.addParser('update', {
     addHelp: true,
-    description: 'Verify if release information matches with JIRA administration'
+    aliases: ['up'],
+    description: 'Update release information in JIRA administration'
 });
-check.addArgument('from', {help: 'Git tag to start from (excluded)'});
-check.addArgument('to', {help: 'Git tag to end with (included)'});
-check.addArgument(
+update.addArgument('from', {help: 'Git tag to start from (excluded)'});
+update.addArgument('to', {help: 'Git tag to end with (included)'});
+update.addArgument('release', {help: 'JIRA release to add found tickets to'})
+update.addArgument(
     '--jira-config', 
     {
         help: 'JSON file containing Jira connection details and authentication credentials, see: jira_example_config.json and https://www.npmjs.com/package/jira-connector',
@@ -39,15 +41,16 @@ check.addArgument(
     }
 );
 
-function handle(list, verify) {
+function handle(list, update) {
     const args = parser.parseArgs();
     
     switch(args.subcommand_name) {
         case 'list':
         case 'ls':
             return list(args);
-        case 'verify':
-            return verify(args);
+        case 'update':
+        case 'up':
+            return update(args);
     }
 }
 
