@@ -25,14 +25,13 @@ ls.addArgument(
 );
 ls.setDefaults();
 
-const update = subparsers.addParser('update', {
+const update = subparsers.addParser('add', {
     addHelp: true,
-    aliases: ['up'],
-    description: 'Update release information in JIRA administration'
+    description: 'Add fix version to JIRA for all found tickets'
 });
+update.addArgument('version', {help: 'JIRA fix version to add to found tickets'})
 update.addArgument('from', {help: 'Git tag to start from (excluded)'});
 update.addArgument('to', {help: 'Git tag to end with (included)'});
-update.addArgument('release', {help: 'JIRA release to add found tickets to'})
 update.addArgument(
     '--jira-config', 
     {
@@ -41,16 +40,15 @@ update.addArgument(
     }
 );
 
-function handle(list, update) {
+function handle(list, add) {
     const args = parser.parseArgs();
     
     switch(args.subcommand_name) {
         case 'list':
         case 'ls':
             return list(args);
-        case 'update':
-        case 'up':
-            return update(args);
+        case 'add':
+            return add(args);
     }
 }
 

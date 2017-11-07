@@ -8,8 +8,8 @@
     "simple-git": "^1.80.1"
   },
   "name": "git-ticket",
-  "description": "Get JIRA tickets from the Git log of the currently active branch, starting from tag until to tag.",
-  "version": "0.1.2",
+  "description": "Get JIRA ticket info from the Git commit log",
+  "version": "0.2.0",
   "main": "git-ticket.js",
   "devDependencies": {},
   "scripts": {
