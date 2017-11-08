@@ -16,7 +16,7 @@ function getIssue(client, key) {
 
 function editIssue(client, key, issue) {
     return client.issue.editIssue({issueKey: key, issue: issue})
-        .then(_ => Promise.resolve(true))
+        .then(() => Promise.resolve(true))
         .catch(error => {
             debug(error);
             return Promise.resolve(false);

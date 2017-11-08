@@ -16,10 +16,8 @@ function handleLog(log) {
     const ids = git.findIdsInLog(log);
 
     if (jiraClient) {
-        Promise.all(
-            ids.map(id => jira.getIssue(jiraClient, id))
-        ).then(issues => {
-            issues.sort((a, b) => (a.key).localeCompare(b.key));
+        Promise.all(ids.map(id => jira.getIssue(jiraClient, id))).then(issues => {
+            issues.sort((a, b) => a.key.localeCompare(b.key));
             issues.map(issue => printSummaryLine(issue));
         });
     } else {
@@ -28,8 +26,9 @@ function handleLog(log) {
     }
 }
 
+// eslint-disable-next-line camelcase
 function list({from, to, jira_config}) {
-    if (jira_config) {
+    if (jira_config) { // eslint-disable-line camelcase
         const configFile = path.resolve(jira_config);
         jiraClient = jira.createClient(configFile);
     }

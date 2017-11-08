@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-const colors = require('colors');
 const git = require('../git');
 const jira = require('../jira');
 const path = require('path');
@@ -16,16 +14,14 @@ function updateFixVersions(key, fixVersions, newFixVersion) {
         }
     };
 
-    jira.editIssue(jiraClient, key, editIssue).then(
-        res => {
-            if (res) {
-                const newReleases = fixVersions.map(v => v.name).join(', ');
-                console.log(`${key} ${newReleases}`.yellow);
-            } else {
-                console.log(`${key} ${prevReleases}`.red);
-            }
+    jira.editIssue(jiraClient, key, editIssue).then(res => {
+        if (res) {
+            const newReleases = fixVersions.map(v => v.name).join(', ');
+            console.log(`${key} ${newReleases}`.yellow);
+        } else {
+            console.log(`${key} ${prevReleases}`.red);
         }
-    );
+    });
 }
 
 function handleReleaseLine({key, issue}, version) {
@@ -33,7 +29,7 @@ function handleReleaseLine({key, issue}, version) {
         const fixVersions = issue.fields.fixVersions;
         const releases = fixVersions.map(v => v.name).join(', ');
 
-        const foundRelease = fixVersions.find(v => v.name == version);
+        const foundRelease = fixVersions.find(v => v.name === version);
         if (foundRelease) {
             console.log(`${key} ${releases}`.green);
         } else {
@@ -47,13 +43,12 @@ function handleReleaseLine({key, issue}, version) {
 function handleLog(log, version) {
     const ids = git.findIdsInLog(log);
 
-    Promise.all(
-        ids.map(id => jira.getIssue(jiraClient, id))
-    ).then(issues => {
+    Promise.all(ids.map(id => jira.getIssue(jiraClient, id))).then(issues => {
         issues.map(issue => handleReleaseLine(issue, version));
     });
 }
 
+// eslint-disable-next-line camelcase
 function add({from, to, jira_config, version}) {
     const configFile = path.resolve(jira_config);
     jiraClient = jira.createClient(configFile);
