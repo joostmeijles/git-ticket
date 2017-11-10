@@ -9,7 +9,7 @@
   },
   "name": "git-ticket",
   "description": "Get JIRA ticket info from the Git commit log",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "git-ticket.js",
   "devDependencies": {
     "eslint": "^4.10.0"
