@@ -1,4 +1,4 @@
-# git-ticket [![Build Status](https://travis-ci.org/joostmeijles/git-ticket.svg?branch=master)](https://travis-ci.org/joostmeijles/git-ticket)
+# git-ticket [![Build Status](https://travis-ci.org/joostmeijles/git-ticket.svg?branch=master)](https://travis-ci.org/joostmeijles/git-ticket) [![npm version](https://badge.fury.io/js/git-ticket.svg)](https://badge.fury.io/js/git-ticket)
 Get JIRA tickets from the Git commit log.
 
 Supported actions are:

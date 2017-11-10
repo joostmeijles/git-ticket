@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-    - "6"
+- '6'
 before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.27.5
-  - export PATH="$HOME/.yarn/bin:$PATH"
+- curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.27.5
+- export PATH="$HOME/.yarn/bin:$PATH"
+deploy:
+  provider: npm
+  email: joost@meijl.es
+  api_key:
+    secure: MLK6sq1JOb3IBmnb0qPhbnJG6d0PCFWqlsuPUMw45J3tYOhk047cs47fsq+mFoqHRmjhxV78HLRwUFFzl6EpECdjFhmUE/Ci5/GMDM67L7puB7QF2+Gd2sL/PLNb06l+IDIt2N8HGP+75ZobRC7GrjLY3no/IACRY2uM/tzFdYhGa1LA21X2ib+qENdxYXddoZYmUZcT7oMUtg28iLZWVG7s/ue2tr628i3RTBFrsmRCK6Gp9rJWPg/4FocdZhu/f6fFWM3tDQNbn/GEs8CQSsyZit1/YN6wuOREgZOKxLyJ69kpqeNEO9bzqkNxYFRifZXPVtZF3lDnzrD/7lGUD4UlfR78zkKcWCtG1y/DadDDDhl6wHevuQVgeGLgOFYlbxV7AW7UhLJdlcf7sJM5rjLJECjY1BdXFfUi/pKkRSNip2mhqlaJPoPVPLcOC0qWyt0HIrZ3bSB0HjQDtHnfybbxnDH1w0gfPtR8zyYG+wxH9WJeRWFEFhn95ZxzKJl3tubfso2MA7NX407jE2oAqPL2Oiua5LHCNxU1rSxhjS/Wt8MeIvkRWazSV00xa9hbr2IQVZsnvBvrC1F+YKxmbAWJgjnKiDFH3LIUK3fMGg8qve0Xct4eqLUQoTK9mvbkTqCPOQCg4yuryHRtv0cek1O0SvLyamdmeW/h/Jsr1nY=
