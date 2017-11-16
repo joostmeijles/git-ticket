@@ -1,6 +1,5 @@
 const git = require('../git');
 const jira = require('../jira');
-const path = require('path');
 
 let jiraClient = null;
 
@@ -29,8 +28,7 @@ function handleLog(log) {
 // eslint-disable-next-line camelcase
 function list({from, to, jira_config}) {
     if (jira_config) { // eslint-disable-line camelcase
-        const configFile = path.resolve(jira_config);
-        jiraClient = jira.createClient(configFile);
+        jiraClient = jira.createClient(jira_config);
     }
 
     const options = {from: from, to: to};

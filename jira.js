@@ -1,8 +1,13 @@
 const debug = require('debug')('debug');
+const fs = require('fs');
 const JiraClient = require('jira-connector');
 
+function requireJson(filePath) {
+    return JSON.parse(fs.readFileSync(filePath));
+}
+
 function createClient(configFile) {
-    return new JiraClient(require(configFile));
+    return new JiraClient(requireJson(configFile));
 }
 
 function getIssue(client, key) {

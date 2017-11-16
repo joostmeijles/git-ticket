@@ -20,7 +20,7 @@ JIRA-1
 JIRA ticket numbers are written to standard output.
 
 ## List tickets and retrieve summary info from JIRA
-The JIRA ticket summary can be automatically retrieved by passing the `--jira-config` option:
+The JIRA ticket summary can be automatically when a JIRA configuration file is found. Either use the default `.jiraconfig` or pass a custom file using the `--jira-config` option:
 ```
 $ get-ticket ls v1Tag v3Tag --jira-config jira_example_config.json
 GIT-1 First test story
@@ -30,13 +30,15 @@ JIRA-1
 The JSON file contains the Jira connection details and authentication credentials to use, see jira_example_config.json and https://www.npmjs.com/package/jira-connector for details.
 
 ## Add fix version in JIRA
-To add fix version `0.1` for all tickets found from `v2Tag` till `HEAD`:
+To add fix version `0.2.1` for all tickets found from `v2Tag` till `0.2.1`:
 ```
-$ git-ticket add 0.2 v2Tag HEAD --jira-config=jira.json
-GIT-1 0.1, 0.2
-GIT-2 0.2
+$ git-ticket add v2Tag 0.2.1
+GIT-1 0.1, 0.2.1
+GIT-2 0.2.1
 ```
-Lines printed:
+By default the `to` tag is used a fix version value, to override use the `--fix-version` option.
+
+Line colors mean:
 - green: no update needed, already has fix version
 - yellow: added fix version
 - red: failed to update fix version

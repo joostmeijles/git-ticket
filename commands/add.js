@@ -1,6 +1,6 @@
+require('colors');
 const git = require('../git');
 const jira = require('../jira');
-const path = require('path');
 
 let jiraClient = null;
 
@@ -48,10 +48,14 @@ function handleLog(log, version) {
     });
 }
 
-// eslint-disable-next-line camelcase
-function add({from, to, jira_config, version}) {
-    const configFile = path.resolve(jira_config);
-    jiraClient = jira.createClient(configFile);
+function add(args) {
+    // eslint-disable-next-line camelcase
+    const {from, to, jira_config} = args;
+    
+    const version = args.fix_version || to;
+    console.log(`Adding fix-version: ${version}`);
+
+    jiraClient = jira.createClient(jira_config);
 
     const options = {from: from, to: to};
     git.getLog(options, (log) => handleLog(log, version));

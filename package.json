@@ -3,6 +3,7 @@
     "argparse": "^1.0.9",
     "colors": "^1.1.2",
     "debug": "^3.1.0",
+    "find-config": "^1.0.0",
     "jira-connector": "^2.6.0",
     "reverse-string": "^0.0.6",
     "simple-git": "^1.80.1"
