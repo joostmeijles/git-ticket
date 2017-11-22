@@ -1,5 +1,7 @@
+const assert = require('assert');
 const debug = require('debug')('debug');
 const git = require('simple-git');
+const {spawnSync} = require('child_process');
 const reverse = require('reverse-string');
 
 function findIdsInString(str) {
@@ -36,7 +38,42 @@ function getLog(options, cb) {
     });
 }
 
+const versionRegex = '[0-9]*\\.[0-9]*\\.[0-9]*'
+
+function getPrevTag() {
+    const res = spawnSync('git', [
+        'describe',
+        '--tags', 
+        '--abbrev=0',
+        `--match=${versionRegex}`,
+        'HEAD^'
+    ]);
+    
+    // eslint-disable-next-line no-magic-numbers
+    assert.equal(res.status, 0, 'Failed to find previous tag');
+    
+    const tag = res.stdout.toString().trim();
+    return tag;
+}
+
+function getCurrentTag() {
+    const res = spawnSync('git', [
+        'describe',
+        '--tags', 
+        '--exact-match',
+        `--match=${versionRegex}`
+    ]);
+    
+    // eslint-disable-next-line no-magic-numbers
+    assert.equal(res.status, 0, 'Failed to find current tag');
+    
+    const tag = res.stdout.toString().trim();
+    return tag;
+}
+
 module.exports = {
     findIdsInLog: findIdsInLog,
-    getLog: getLog
+    getLog: getLog,
+    getCurrentTag: getCurrentTag,
+    getPrevTag: getPrevTag
 }

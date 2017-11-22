@@ -2,6 +2,7 @@
 const assert = require('assert');
 const argparse = require('argparse');
 const findConfig = require('find-config');
+const git = require('./git');
 
 const parser = new argparse.ArgumentParser({
     version: require('./package.json').version,
