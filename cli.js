@@ -16,7 +16,9 @@ const subparsers = parser.addSubparsers({
 });
 
 function addDefaultArgs(subparser) {
-    subparser.addArgument('from', {help: 'Git tag to start from (excluded).'});
+    subparser.addArgument('--from', {
+        help: 'Git tag to start from (excluded).'
+    });
     subparser.addArgument('to', {help: 'Git tag to end with (included).'});
     subparser.addArgument('--jira-config', {   
         defaultValue: findConfig('.jiraconfig'),
@@ -46,6 +48,10 @@ add.addArgument('--fix-version', {
 
 function handle(listCommand, addCommand) {
     const args = parser.parseArgs();
+    
+    if (!args.from) {
+        args.from = git.getPrevTag(args.to);
+    }
     
     switch(args.subcommand_name) {
         case 'list':

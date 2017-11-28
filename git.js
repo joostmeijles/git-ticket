@@ -40,17 +40,17 @@ function getLog(options, cb) {
 
 const versionRegex = '[0-9]*\\.[0-9]*\\.[0-9]*'
 
-function getPrevTag() {
+function getPrevTag(from) {
     const res = spawnSync('git', [
         'describe',
         '--tags', 
         '--abbrev=0',
         `--match=${versionRegex}`,
-        'HEAD^'
+        `${from}^`
     ]);
     
     // eslint-disable-next-line no-magic-numbers
-    assert.equal(res.status, 0, 'Failed to find previous tag');
+    assert.equal(res.status, 0, `Failed to find previous tag from ${from}`);
     
     const tag = res.stdout.toString().trim();
     return tag;

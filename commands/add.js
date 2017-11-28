@@ -53,7 +53,7 @@ function add(args) {
     const {from, to, jira_config} = args;
     
     const version = args.fix_version || to;
-    console.log(`Adding fix-version: ${version}`);
+    console.log(`Adding fix-version ${version}, from ${from} to ${to}`);
 
     jiraClient = jira.createClient(jira_config);
 

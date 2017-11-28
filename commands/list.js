@@ -31,6 +31,8 @@ function list({from, to, jira_config}) {
         jiraClient = jira.createClient(jira_config);
     }
 
+    console.log(`Listing from ${from} to ${to}`);
+
     const options = {from: from, to: to};
     git.getLog(options, (log) => handleLog(log));
 }
