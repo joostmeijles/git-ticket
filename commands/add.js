@@ -1,6 +1,7 @@
 require('colors');
 const git = require('../git');
 const jira = require('../jira');
+const Promise = require('bluebird');
 
 let jiraClient = null;
 
@@ -43,9 +44,10 @@ function handleReleaseLine({key, issue}, version) {
 function handleLog(log, version) {
     const ids = git.findIdsInLog(log);
 
-    Promise.all(ids.map(id => jira.getIssue(jiraClient, id))).then(issues => {
-        issues.map(issue => handleReleaseLine(issue, version));
-    });
+    Promise.map(ids, id => jira.getIssue(jiraClient, id), {concurrency: 3})
+        .then(issues => {
+            issues.map(issue => handleReleaseLine(issue, version));
+        });
 }
 
 function add(args) {

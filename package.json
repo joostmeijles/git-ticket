@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "argparse": "^1.0.9",
+    "bluebird": "^3.5.1",
     "colors": "^1.1.2",
     "debug": "^3.1.0",
     "find-config": "^1.0.0",
@@ -10,7 +11,7 @@
   },
   "name": "git-ticket",
   "description": "Get JIRA ticket info from the Git commit log",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "main": "git-ticket.js",
   "devDependencies": {
     "eslint": "^4.10.0"

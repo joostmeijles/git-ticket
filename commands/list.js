@@ -1,5 +1,6 @@
 const git = require('../git');
 const jira = require('../jira');
+const Promise = require('bluebird');
 
 let jiraClient = null;
 
@@ -15,10 +16,11 @@ function handleLog(log) {
     const ids = git.findIdsInLog(log);
 
     if (jiraClient) {
-        Promise.all(ids.map(id => jira.getIssue(jiraClient, id))).then(issues => {
-            issues.sort((a, b) => a.key.localeCompare(b.key));
-            issues.map(issue => printSummaryLine(issue));
-        });
+        Promise.map(ids, id => jira.getIssue(jiraClient, id), {concurrency: 3})
+            .then(issues => {
+                issues.sort((a, b) => a.key.localeCompare(b.key));
+                issues.map(issue => printSummaryLine(issue));
+            });
     } else {
         ids.sort();
         ids.map(id => printSummaryLine({key:id}));
