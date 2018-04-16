@@ -14,7 +14,7 @@ $ npm install git-ticket
 ## List tickets from Git commit message
 To retrieve all JIRA tickets that are present in commit messages starting from the previous tag (automatically determined) until Git tag version 0.2:
 ```
-$ get-ticket list 0.2
+$ git-ticket list 0.2
 Listing from 0.1 to 0.2
 JIRA-1
 ```
@@ -23,7 +23,7 @@ JIRA ticket numbers are written to standard output.
 ## List tickets and retrieve summary info from JIRA
 The JIRA ticket summary can be automatically when a JIRA configuration file is found. Either use the default `.jiraconfig` or pass a custom file using the `--jira-config` option:
 ```
-$ get-ticket ls 0.2.1 --jira-config jira_example_config.json
+$ git-ticket ls 0.2.1 --jira-config jira_example_config.json
 Listing from 0.2 to 0.2.1
 GIT-1 First test story
 GIT-2
