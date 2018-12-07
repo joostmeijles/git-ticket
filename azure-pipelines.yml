@@ -9,4 +9,4 @@ pool:
 steps:
 - script: |
     yarn install
-    npm run test
+    npm test
